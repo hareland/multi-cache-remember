@@ -1,3 +1,4 @@
+[![Build](https://github.com/hareland/multi-cache-remember/actions/workflows/pest.yml/badge.svg)](https://github.com/hareland/multi-cache-remember/actions/workflows/pest.yml)
 ## Another laravel package :)
 ### What does this package solve?
 
