@@ -1,0 +1,45 @@
+{
+  "name": "hareland/multi-cache-remember",
+  "description": "Get or compute multiple cache:remember at the same time, and only execute missing key functions.",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Hareland",
+      "email": "mrhareland+packagist@gmail.com",
+      "homepage": "https://github.com/hareland"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Hareland\\MultiCacheRemember\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Hareland\\MultiCacheRemember\\Tests\\": "tests/"
+    }
+  },
+  "require": {
+    "illuminate/support": "^6|^7|^8|^9|^10.6"
+  },
+  "require-dev": {
+    "mockery/mockery": "^1.0",
+    "phpunit/phpunit": "^9.0",
+    "pestphp/pest": "^1.22",
+    "pestphp/pest-plugin-laravel": "^1.3",
+    "orchestra/testbench": "^7.10"
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Hareland\\MultiCacheRemember\\MultiCacheServiceProvider"
+      ]
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "pestphp/pest-plugin": true
+    }
+  }
+}
