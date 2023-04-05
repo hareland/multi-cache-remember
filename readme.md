@@ -44,7 +44,7 @@ composer require hareland/multi-cache-remember
 
 use Illuminate\Support\Facades\Cache;
 
-$results = Cache::rememberMulti([
+[$user1, $user2, $meta] = Cache::rememberMulti([
     'user:1' => fn ()=> \App\Models\User::findOrFail(1),
     'user:2' => fn ()=> \App\Models\User::findOrFail(2),
     'meta:11'=> fn ()=> \App\Models\Meta::findOrFail(11),
@@ -56,7 +56,7 @@ $results = Cache::rememberMulti([
 <?php
 use Illuminate\Support\Facades\Cache;
 
-$results = Cache::rememberMulti([
+[$topStats, $orgSales, $overview] = Cache::rememberMulti([
     'dashboard.stats.top:user:1' => [fn() => \App\Models\Stats::findFor(request()->user()), 60 * 15],
     'dashboard.stats.sales:org:3' => [fn() => \App\Models\StatsForOrf::findFor(request()->user()->currentOrg), 60 * 5],
     'dashboard.stats.overview:org:3' => fn() => \App\Models\OverviewStats::findFor(request()->user()->currentOrg),
