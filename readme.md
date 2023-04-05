@@ -1,9 +1,13 @@
 [![Build](https://github.com/hareland/multi-cache-remember/actions/workflows/pest.yml/badge.svg)](https://github.com/hareland/multi-cache-remember/actions/workflows/pest.yml)
 ### What does this package solve?
 
-> The rememberMulti macro for the Laravel Cache facade provides several advantages over the traditional method of
-> looking up multiple cache keys one by one. These advantages include:
+This package offers the rememberMulti macro for the Laravel Cache facade, providing efficient retrieval of multiple cache keys with customizable expiration and callbacks for missing keys.
 
+
+> The rememberMulti macro for the Laravel Cache facade provides several advantages over the traditional method of
+> looking up multiple cache keys one by one. 
+
+### And...?
 1. Reduced number of cache lookups: With the traditional method, each cache key is looked up individually, even if some
    of them are being retrieved in quick succession. With the rememberMulti macro, all the requested keys are retrieved
    in a single call to Cache::many(), which can significantly reduce the number of cache lookups and improve
