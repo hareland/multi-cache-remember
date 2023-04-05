@@ -19,13 +19,18 @@ class MultiCacheServiceProvider extends ServiceProvider
                 return [];
             }
 
+            $cacheManyFilter = fn($item) => false === $item ? false : $item;
+
             $keys = $callbacks = $ttls = [];
 
             foreach ($keysAndCallbacks as $key => &$value) {
                 if (!is_string($key)) {
                     //This likely means this is simply a lookup,
-                    // so we just return the values from cache for simplicity...
-                    return array_filter(Cache::many(array_values($keysAndCallbacks)), fn($item) => false === $item ? false : $item);
+                    // so we just return the values from cache for simplicity (using the same filtering logic)...
+                    return array_filter(Cache::many(
+                        array_values($keysAndCallbacks)),
+                        $cacheManyFilter,
+                    );
                 }
 
                 if (is_callable($value)) {
@@ -42,9 +47,15 @@ class MultiCacheServiceProvider extends ServiceProvider
             unset($value); // unset reference
 
             // Get hits from cache.
-            $values = array_filter(Cache::many($keys), fn($item) => false === $item ? false : $item);
+            $values = array_filter(
+                Cache::many($keys),
+                $cacheManyFilter
+            );
 
-            $missingKeys = array_diff_key(array_flip($keys), $values);
+            $missingKeys = array_diff_key(
+                array_flip($keys),
+                $values,
+            );
 
             if (!empty($missingKeys)) {
                 $newValues = [];
