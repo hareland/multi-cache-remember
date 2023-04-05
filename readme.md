@@ -54,6 +54,7 @@ use Illuminate\Support\Facades\Cache;
 #### Custom TTL on some keys
 ```php
 <?php
+
 use Illuminate\Support\Facades\Cache;
 
 [$topStats, $orgSales, $overview] = Cache::rememberMany([
