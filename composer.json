@@ -1,6 +1,6 @@
 {
   "name": "hareland/multi-cache-remember",
-  "description": "Get or compute multiple cache:remember at the same time, and only execute missing key functions.",
+  "description": "This package offers the rememberMulti macro for the Laravel Cache facade, providing efficient retrieval of multiple cache keys with customizable expiration and callbacks for missing keys.",
   "type": "library",
   "license": "MIT",
   "authors": [
