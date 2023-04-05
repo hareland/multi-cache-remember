@@ -14,31 +14,37 @@ class MultiCacheServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Cache::macro('rememberMulti', function (array $keysAndCallbacks, $defaultTtl = null) {
+        Cache::macro('rememberMulti', function (array $keysAndCallbacks, $defaultTtl = null): array {
             if (empty($keysAndCallbacks)) {
                 return [];
             }
 
             $keys = $callbacks = $ttls = [];
 
-            // Iterate over the input array and populate the separate arrays.
-            foreach ($keysAndCallbacks as $key => $value) {
-                if (!is_string($key) || (!is_array($value) && !is_callable($value))) {
-                    throw new \InvalidArgumentException('Key must be a string and value must be an array or a callable.');
+            foreach ($keysAndCallbacks as $key => &$value) {
+                if (!is_string($key)) {
+                    //This likely means this is simply a lookup,
+                    // so we just return the values from cache for simplicity...
+                    return array_filter(Cache::many(array_values($keysAndCallbacks)), fn($item) => false === $item ? false : $item);
                 }
 
-                $keys[$key] = $key;
-                $callbacks[$key] = fn() => value(is_array($value) ? $value[0] : $value);
-                $ttls[$key] = is_array($value) ? $value[1] ?? $defaultTtl : $defaultTtl;
+                if (is_callable($value)) {
+                    $value = [$value, $defaultTtl];
+                } elseif (!is_array($value) || !is_callable($value[0])) {
+                    throw new \InvalidArgumentException(
+                        "\$keysAndCallbacks[$key] must be an array or a callable."
+                    );
+                }
+
+                list($callbacks[$key], $ttls[$key]) = $value;
+                $keys[] = $key;
             }
+            unset($value); // unset reference
 
             // Get hits from cache.
-            $values = array_filter(array_map(
-                fn($item) => false === $item ? null : $item,
-                Cache::many(array_keys($keys)),
-            ));
+            $values = array_filter(Cache::many($keys), fn($item) => false === $item ? false : $item);
 
-            $missingKeys = array_diff_key($keys, array_flip($values));
+            $missingKeys = array_diff_key(array_flip($keys), $values);
 
             if (!empty($missingKeys)) {
                 $newValues = [];
