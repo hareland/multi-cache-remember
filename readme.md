@@ -1,23 +1,23 @@
 [![Build](https://github.com/hareland/multi-cache-remember/actions/workflows/pest.yml/badge.svg)](https://github.com/hareland/multi-cache-remember/actions/workflows/pest.yml)
 ### What does this package solve?
 
-This package offers the rememberMulti macro for the Laravel Cache facade, providing efficient retrieval of multiple cache keys with customizable expiration and callbacks for missing keys.
+This package offers the rememberMany macro for the Laravel Cache facade, providing efficient retrieval of multiple cache keys with customizable expiration and callbacks for missing keys.
 
 
-> The rememberMulti macro for the Laravel Cache facade provides several advantages over the traditional method of
+> The rememberMany macro for the Laravel Cache facade provides several advantages over the traditional method of
 > looking up multiple cache keys one by one. 
 
 ### And...?
 1. Reduced number of cache lookups: With the traditional method, each cache key is looked up individually, even if some
-   of them are being retrieved in quick succession. With the rememberMulti macro, all the requested keys are retrieved
+   of them are being retrieved in quick succession. With the rememberMany macro, all the requested keys are retrieved
    in a single call to Cache::many(), which can significantly reduce the number of cache lookups and improve
    performance.
 
-2. Customizable cache expiration: The rememberMulti macro allows you to specify an expiration time for all the cached
+2. Customizable cache expiration: The rememberMany macro allows you to specify an expiration time for all the cached
    values at once, which can simplify the cache management process and make it easier to ensure that your cached data is
    up-to-date.
 
-3. Callbacks for missing keys: The rememberMulti macro allows you to specify a callback function for each cache key,
+3. Callbacks for missing keys: The rememberMany macro allows you to specify a callback function for each cache key,
    which will be called only if the key is not found in the cache. This is similar to the `Cache::remember()` method.
 
 ### Install
@@ -44,7 +44,7 @@ composer require hareland/multi-cache-remember
 
 use Illuminate\Support\Facades\Cache;
 
-[$user1, $user2, $meta] = Cache::rememberMulti([
+[$user1, $user2, $meta] = Cache::rememberMany([
     'user:1' => fn ()=> \App\Models\User::findOrFail(1),
     'user:2' => fn ()=> \App\Models\User::findOrFail(2),
     'meta:11'=> fn ()=> \App\Models\Meta::findOrFail(11),
@@ -56,7 +56,7 @@ use Illuminate\Support\Facades\Cache;
 <?php
 use Illuminate\Support\Facades\Cache;
 
-[$topStats, $orgSales, $overview] = Cache::rememberMulti([
+[$topStats, $orgSales, $overview] = Cache::rememberMany([
     'dashboard.stats.top:user:1' => [fn() => \App\Models\Stats::findFor(request()->user()), 60 * 15],
     'dashboard.stats.sales:org:3' => [fn() => \App\Models\StatsForOrf::findFor(request()->user()->currentOrg), 60 * 5],
     'dashboard.stats.overview:org:3' => fn() => \App\Models\OverviewStats::findFor(request()->user()->currentOrg),

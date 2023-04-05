@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Cache;
 
 it('throws exception if only keys are passed.', function () {
     Cache::put('foo', 'bar');
-    $result = Cache::rememberMulti([
+    $result = Cache::rememberMany([
         'foo',
         'baz'
     ], 30);
@@ -15,7 +15,7 @@ it('throws exception if only keys are passed.', function () {
 });
 
 it('retrieves and stores missing values with default TTL', function () {
-    $result = Cache::rememberMulti([
+    $result = Cache::rememberMany([
         'foo' => fn() => 'bar',
         'baz' => fn() => 'qux'
     ], 30);
@@ -30,7 +30,7 @@ it('retrieves and stores missing values with default TTL', function () {
 });
 
 it('retrieves and stores missing values with custom TTL', function () {
-    $result = Cache::rememberMulti([
+    $result = Cache::rememberMany([
         'foo' => [fn() => 'bar', 30],
         'baz' => [fn() => 'qux', 3]
     ], 60);
@@ -49,7 +49,7 @@ it('retrieves and stores missing values with custom TTL', function () {
 });
 
 it('returns empty array if empty array is passed as keys', function () {
-    $result = Cache::rememberMulti([], 30);
+    $result = Cache::rememberMany([], 30);
 
     expect($result)->toBe([]);
 });

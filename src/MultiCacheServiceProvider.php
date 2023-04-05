@@ -14,7 +14,7 @@ class MultiCacheServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Cache::macro('rememberMulti', function (array $keysAndCallbacks, $defaultTtl = null): array {
+        Cache::macro('rememberMany', function (array $keysAndCallbacks, $defaultTtl = null): array {
             if (empty($keysAndCallbacks)) {
                 return [];
             }
