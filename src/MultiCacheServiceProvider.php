@@ -78,7 +78,7 @@ class MultiCacheServiceProvider extends ServiceProvider
                 $values = array_merge($values, $newValues);
             }
 
-            return array_replace(array_flip(array_keys($keysAndCallbacks)), $values);
+            return array_replace(array_flip($keys), $values);
         });
 
     }
