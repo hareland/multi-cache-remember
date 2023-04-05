@@ -57,8 +57,8 @@ $results = Cache::rememberMulti([
 use Illuminate\Support\Facades\Cache;
 
 $results = Cache::rememberMulti([
-    'dashboard.stats.top:user:1' => [fn()=>\App\Models\Stats::findFor(request()->user()), 60 * 15],
-    'dashboard.stats.sales:org:3' => [fn()=>\App\Models\StatsForOrf::findFor(request()->user()->currentOrg), 60 * 5],
-    'dashboard.stats.overview:org:3' => fn()=> \App\Models\OverviewStats::findFor(request()->user()->currentOrg),
+    'dashboard.stats.top:user:1' => [fn() => \App\Models\Stats::findFor(request()->user()), 60 * 15],
+    'dashboard.stats.sales:org:3' => [fn() => \App\Models\StatsForOrf::findFor(request()->user()->currentOrg), 60 * 5],
+    'dashboard.stats.overview:org:3' => fn() => \App\Models\OverviewStats::findFor(request()->user()->currentOrg),
 ], 60); // 60 seconds is the default TTL for any keys that does not have a custom one.
 ```
