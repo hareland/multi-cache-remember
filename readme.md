@@ -1,6 +1,4 @@
 [![Build](https://github.com/hareland/multi-cache-remember/actions/workflows/pest.yml/badge.svg)](https://github.com/hareland/multi-cache-remember/actions/workflows/pest.yml)
-## Another laravel package :)
-> **NOTE**: This package is currently WIP, Pull Requests are appreciated!
 ### What does this package solve?
 
 > The rememberMulti macro for the Laravel Cache facade provides several advantages over the traditional method of
@@ -17,6 +15,7 @@
 
 3. Callbacks for missing keys: The rememberMulti macro allows you to specify a callback function for each cache key,
    which will be called only if the key is not found in the cache. This is similar to the `Cache::remember()` method.
+
 ### Install
 
 ```bash
