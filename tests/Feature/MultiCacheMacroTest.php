@@ -3,12 +3,15 @@
 use Illuminate\Support\Facades\Cache;
 
 it('throws exception if only keys are passed.', function () {
-    $this->expectException(InvalidArgumentException::class);
-    Cache::rememberMulti([
+    Cache::put('foo', 'bar');
+    $result = Cache::rememberMulti([
         'foo',
         'baz'
     ], 30);
 
+    expect($result)->toBe([
+        'foo' => 'bar',
+    ]);
 });
 
 it('retrieves and stores missing values with default TTL', function () {
