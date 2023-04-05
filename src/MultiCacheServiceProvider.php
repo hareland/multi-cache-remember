@@ -19,6 +19,10 @@ class MultiCacheServiceProvider extends ServiceProvider
                 return [];
             }
 
+            if(null === $defaultTtl) {
+                $defaultTtl = config('services.multi_remember.default_ttl', 120);
+            }
+
             $cacheManyFilter = fn($item) => false === $item ? false : $item;
 
             $keys = $callbacks = $ttls = [];
