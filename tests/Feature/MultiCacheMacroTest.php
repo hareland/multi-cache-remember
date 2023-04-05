@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Cache;
 
-it('throws exception if only values are passed.', function () {
+it('throws exception if only keys are passed.', function () {
     $this->expectException(InvalidArgumentException::class);
     Cache::rememberMulti([
         'foo',
