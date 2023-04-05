@@ -34,6 +34,8 @@ composer require hareland/multi-cache-remember
 
 ### Usage
 
+
+#### Simple (No custom TTL)
 ```php
 <?php
 
@@ -43,5 +45,17 @@ $results = Cache::rememberMulti([
     'user:1' => fn ()=> \App\Models\User::findOrFail(1),
     'user:2' => fn ()=> \App\Models\User::findOrFail(2),
     'meta:11'=> fn ()=> \App\Models\Meta::findOrFail(11),
-], 5);
+], 5);// 5 seconds is now the TTL for all the items.
+```
+
+#### Custom TTL on some keys
+```php
+<?php
+use Illuminate\Support\Facades\Cache;
+
+$results = Cache::rememberMulti([
+    'dashboard.stats.top:user:1' => [fn()=>\App\Models\Stats::findFor(request()->user()), 60 * 15],
+    'dashboard.stats.sales:org:3' => [fn()=>\App\Models\StatsForOrf::findFor(request()->user()->currentOrg), 60 * 5],
+    'dashboard.stats.overview:org:3' => fn()=> \App\Models\OverviewStats::findFor(request()->user()->currentOrg),
+], 60); // 60 seconds is the default TTL for any keys that does not have a custom one.
 ```
