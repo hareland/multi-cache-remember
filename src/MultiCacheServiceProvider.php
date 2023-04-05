@@ -19,7 +19,7 @@ class MultiCacheServiceProvider extends ServiceProvider
                 return [];
             }
 
-            if(null === $defaultTtl) {
+            if (null === $defaultTtl) {
                 $defaultTtl = config('services.multi_remember.default_ttl', 120);
             }
 
@@ -78,7 +78,7 @@ class MultiCacheServiceProvider extends ServiceProvider
                 $values = array_merge($values, $newValues);
             }
 
-            return $values;
+            return array_replace(array_flip(array_keys($keysAndCallbacks)), $values);
         });
 
     }
