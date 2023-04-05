@@ -16,9 +16,7 @@
    up-to-date.
 
 3. Callbacks for missing keys: The rememberMulti macro allows you to specify a callback function for each cache key,
-   which will be called only if the key is not found in the cache. This can be useful for retrieving data from a
-   database or external API, and can help you avoid unnecessary queries for data that is already in the cache.
-
+   which will be called only if the key is not found in the cache. This is similar to the `Cache::remember()` method.
 ### Install
 
 ```bash
