@@ -33,7 +33,7 @@ composer require hareland/multi-cache-remember
 ```
 
 ### Usage
-
+> To set the default TTL, you can set this in `config/services.php` on the key `multi_remember.default_ttl` -> You will have to set it in seconds.
 
 #### Simple (No custom TTL)
 ```php
