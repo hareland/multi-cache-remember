@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Cache;
 
-it('throws exception if only keys are passed.', function () {
+it('gets existing items using only values as keys', function () {
     Cache::put('foo', 'bar');
     $result = Cache::rememberMany([
         'foo',

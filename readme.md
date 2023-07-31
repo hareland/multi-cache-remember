@@ -1,4 +1,5 @@
 [![Build](https://github.com/hareland/multi-cache-remember/actions/workflows/pest.yml/badge.svg)](https://github.com/hareland/multi-cache-remember/actions/workflows/pest.yml)
+[![Total Downloads](https://img.shields.io/packagist/dt/hareland/multi-cache-remember.svg?style=flat-square)](https://packagist.org/packages/hareland/multi-cache-remember)
 ### What does this package solve?
 
 ---
